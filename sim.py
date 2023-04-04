@@ -67,7 +67,7 @@ def get_viz(node_data, edge_data, percentage):
         y='Percentage:Q'
     ).properties(width=600, height=400)
     
-    chart = ((node_chart + edge_chart) & percentage_chart).configure_axis(grid=False, domain=False)
+    chart = (percentage_chart & (edge_chart + node_chart)).configure_axis(grid=False, domain=False)
     return chart
 
 def main():
