@@ -3,7 +3,7 @@
 ## Simulation Assumptions
 
 - Assuming a set of people forming a social network $G$.
-    <img src="./assets/2023-04-04-QueasyXuanhanosaurus.png" alt="2023-04-04-QueasyXuanhanosaurus" style="zoom:50%;" />
+    <img src="https://github.com/Enoch2090/social_network_externality/raw/main/assets/2023-04-04-QueasyXuanhanosaurus.png" alt="2023-04-04-QueasyXuanhanosaurus" style="zoom:50%;" />
 - A new platform arises and tries to acquire users from $G$.
   People choose to join when their utility larger than their transition cost. That is:
   $$
