@@ -83,6 +83,7 @@ def main():
             'n': graph_grid_size
         }
     elif graph_type == 'Barabasi-Albert':
+        st.markdown('[Barabási–Albert model](https://en.wikipedia.org/wiki/Barab%C3%A1si%E2%80%93Albert_model)')
         graph_node_num = st.sidebar.number_input('Number of Nodes', value=324)
         graph_edge_attach = st.sidebar.number_input('Number of Edges to Attach', value=2)
         graph_kwargs = {
@@ -95,9 +96,9 @@ def main():
     layout_func = GLOBAL_GRAPH[graph_type]['pos']
     st.sidebar.markdown('# Platform & User Settings')
     w1 = st.sidebar.number_input('Weight for network size (w1)', value=0.4)
-    w2 = st.sidebar.number_input('Weight for known people (w2)', value=1.0)
+    w2 = st.sidebar.number_input('Weight for known people (w2)', value=2.0)
     w3 = st.sidebar.number_input('Weight for platform subsidy (w3)', value=1.0)
-    subsidy = st.sidebar.number_input('Platform subsidy', value=13)
+    subsidy = st.sidebar.number_input('Platform subsidy', value=10)
     transition_lb = st.sidebar.number_input('Transition cost lowerbound', value=10)
     transition_ub = st.sidebar.number_input('Transition cost upperbound', value=20)
 
