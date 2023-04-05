@@ -5,13 +5,13 @@ import random
 import math
 import pandas as pd
 import altair as alt
-import nx_altair as nxa
 
 # Set the seed for reproducibility
 random.seed(42)
 np.random.seed(42)
 
 MAX_TIME = 20
+# Define global graph settings and layout calculation functions
 GLOBAL_GRAPH = {
     'Grid': {
         'func': nx.grid_2d_graph,
@@ -23,6 +23,7 @@ GLOBAL_GRAPH = {
     }
 }
 
+# Initialize session state
 alt.data_transformers.disable_max_rows()
 st.session_state['timesteps'] = 1
 st.session_state['node_data'] = []
@@ -93,10 +94,10 @@ def main():
     G = GLOBAL_GRAPH[graph_type]['func'](**graph_kwargs)
     layout_func = GLOBAL_GRAPH[graph_type]['pos']
     st.sidebar.markdown('# Platform & User Settings')
-    w1 = st.sidebar.slider('Weight for network size (w1)', 0.0, 1.0, 1.0)
-    w2 = st.sidebar.slider('Weight for known people (w2)', 0.0, 1.0, 1.0)
-    w3 = st.sidebar.slider('Weight for platform subsidy (w3)', 0.0, 1.0, 1.0)
-    subsidy = st.sidebar.slider('Platform subsidy', 0, 15, 10)
+    w1 = st.sidebar.number_input('Weight for network size (w1)', value=0.4)
+    w2 = st.sidebar.number_input('Weight for known people (w2)', value=1.0)
+    w3 = st.sidebar.number_input('Weight for platform subsidy (w3)', value=1.0)
+    subsidy = st.sidebar.number_input('Platform subsidy', value=13)
     transition_lb = st.sidebar.number_input('Transition cost lowerbound', value=10)
     transition_ub = st.sidebar.number_input('Transition cost upperbound', value=20)
 
@@ -113,8 +114,10 @@ def main():
         chart = get_viz(st.session_state['node_data'], st.session_state['edge_data'], st.session_state['percentage'])
         st.altair_chart(chart)
     except Exception as e:
-        # print(e)
-        st.text('Run simulation first')
+        with open('README.md', 'r') as f:
+            readme = "".join(f.readlines())
+        st.markdown(readme, unsafe_allow_html=True)
+        
 
 def run_simulation(G, layout_func, w1, w2, w3, subsidy, transition_lb, transition_ub, bootstrap):
     for node in G.nodes:
